@@ -35,11 +35,21 @@ router.post('/login', (req, res) => {
           jwt_token: token
         });
       } else {
-        res.status(401).json({ message: 'Invalid Credentials' });
+        res.status(401).json({ message: 'You shall not pass!' });
       }
     })
     .catch(error => {
       res.status(500).json(error);
+    });
+});
+
+router.get("/logout", (req, res) => {
+    req.secret.destroy((err) => {
+        if (err) {
+            res.send("unable to logout");
+        } else {
+            res.send("logged out");
+        }
     });
 });
 
